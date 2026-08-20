@@ -30,69 +30,7 @@ The project demonstrates how multiple managed AWS services can be combined to bu
 
 # Architecture
 
-```text
-                         USERS
-                           |
-                           v
-                    +-------------+
-                    |  Route 53   |
-                    |     DNS     |
-                    +------+------+
-                           |
-                           v
-                    +-------------+
-                    | CloudFront  |
-                    |     CDN     |
-                    +------+------+
-                           |
-                           v
-                    +-------------+
-                    |     S3      |
-                    |  Frontend   |
-                    +-------------+
-                           |
-                           | JavaScript API Request
-                           v
-                    +-------------+
-                    | API Gateway |
-                    |     API     |
-                    +------+------+
-                           |
-                           v
-                    +-------------+
-                    |   Lambda    |
-                    |   Backend   |
-                    +------+------+
-                           |
-                           v
-                    +-------------+
-                    |  DynamoDB   |
-                    |   Counter   |
-                    +-------------+
-
-                           |
-                           v
-                    +-------------+
-                    | CloudWatch  |
-                    |    Logs     |
-                    +-------------+
-
-                      IAM
-                       |
-                       v
-                Access Control
-
-
-                DEVELOPMENT / CI-CD
-
-                  GitHub Repository
-                         |
-                         v
-                  GitHub Actions
-                         |
-                         v
-                    AWS Deployment
-```
+<img width="522" height="1242" alt="CLOUD_RS drawio" src="https://github.com/user-attachments/assets/ce8180c2-cef3-4e46-b004-d57a9cd09337" />
 
 ---
 
@@ -163,18 +101,7 @@ S3 provides the durable storage required for the frontend without requiring an a
 
 The frontend architecture is therefore:
 
-```text
-Website Files
-     |
-     v
-Amazon S3
-     |
-     v
-CloudFront
-     |
-     v
-Users
-```
+<img width="182" height="422" alt="Frontend drawio" src="https://github.com/user-attachments/assets/861859b5-46a8-4e65-b64f-ebd25d9df8a3" />
 
 ---
 
@@ -192,15 +119,7 @@ It provides:
 
 Instead of users accessing the S3 origin directly, the production website is delivered through CloudFront.
 
-```text
-User
- |
- v
-CloudFront
- |
- v
-S3
-```
+<img width="182" height="322" alt="CR drawio" src="https://github.com/user-attachments/assets/a4f7a9f4-d8b3-4d4b-bc59-fac8991eb955" />
 
 This provides a more production-oriented architecture than exposing the storage layer directly to users.
 
@@ -212,18 +131,7 @@ Amazon Route 53 was used to connect my custom domain with the CloudFront distrib
 
 The DNS flow is:
 
-```text
-Custom Domain
-      |
-      v
-Route 53
-      |
-      v
-CloudFront
-      |
-      v
-S3
-```
+<img width="212" height="422" alt="F1 drawio" src="https://github.com/user-attachments/assets/07f3cd7c-7a4c-4fcc-aee4-91446ddba3c5" />
 
 This allows users to access the application using my own domain instead of an AWS-generated service URL.
 
@@ -236,7 +144,7 @@ HTTPS was configured for secure communication with the website.
 The final access pattern is:
 
 ```text
-https://my-domain
+https://shashanktj.com
 ```
 
 rather than serving the production website over plain HTTP.
@@ -251,15 +159,7 @@ The static website was extended with a dynamic backend using AWS serverless serv
 
 The backend consists of:
 
-```text
-API Gateway
-      |
-      v
-Lambda
-      |
-      v
-DynamoDB
-```
+<img width="212" height="322" alt="f2 drawio" src="https://github.com/user-attachments/assets/4e2f1e38-33ed-4851-9667-b1018b461a7d" />
 
 This allows the application to process visitor data without running or maintaining an EC2 server.
 
@@ -271,30 +171,13 @@ Amazon API Gateway provides the HTTP endpoint used by the frontend.
 
 The website JavaScript sends a request to the API:
 
-```text
-Browser
-   |
-   | HTTP Request
-   v
-API Gateway
-```
+<img width="212" height="252" alt="f3 drawio" src="https://github.com/user-attachments/assets/b94e01d4-1ae2-4a6a-93f0-ed940787a92c" />
 
 API Gateway then invokes the Lambda function.
 
 This creates a clean separation between:
 
-```text
-Frontend
-    |
-    v
-API Layer
-    |
-    v
-Backend Logic
-    |
-    v
-Database
-```
+<img width="212" height="452" alt="f4 drawio" src="https://github.com/user-attachments/assets/ff858ea7-5e0f-4eae-bc2e-96c4f7425b13" />
 
 ---
 
@@ -311,15 +194,7 @@ Lambda is responsible for:
 
 The Lambda function runs only when invoked, eliminating the need for a continuously running server.
 
-```text
-API Gateway
-      |
-      v
-Lambda
-      |
-      v
-DynamoDB
-```
+<img width="212" height="342" alt="f5 drawio" src="https://github.com/user-attachments/assets/a3f8f9de-01d0-4cff-ac8f-36e624ef360b" />
 
 This demonstrates the use of **serverless compute** in a real application.
 
@@ -333,21 +208,7 @@ The application uses DynamoDB to maintain visitor information that must survive 
 
 The logical flow is:
 
-```text
-Website
-   |
-   v
-API Gateway
-   |
-   v
-Lambda
-   |
-   v
-DynamoDB
-   |
-   v
-Visitor Count
-```
+<img width="212" height="562" alt="f6 drawio" src="https://github.com/user-attachments/assets/2009ed35-a51b-4072-b4c2-b1dca5079556" />
 
 The visitor count can then be returned to the frontend and displayed on the resume website.
 
@@ -361,13 +222,7 @@ Because the frontend and API are separate origins, CORS was configured to allow 
 
 The communication is:
 
-```text
-Resume Website
-      |
-      | Cross-Origin Request
-      v
-API Gateway
-```
+<img width="272" height="282" alt="f7 drawio" src="https://github.com/user-attachments/assets/582c9c88-de6c-49b8-a192-90d2cd39410a" />
 
 CORS configuration allows the browser to accept the API response from the approved frontend origin.
 
@@ -391,16 +246,7 @@ The project follows the principle of **least privilege**, avoiding unnecessary p
 
 The security model is:
 
-```text
-Lambda
-  |
-  v
-IAM Role
-  |
-  +---- CloudWatch Logs
-  |
-  +---- DynamoDB
-```
+<img width="322" height="332" alt="f8 drawio" src="https://github.com/user-attachments/assets/10d06fac-a3ed-4935-89db-5fa0cc2cbc8e" />
 
 AWS credentials were not embedded inside the website source code.
 
@@ -419,12 +265,8 @@ CloudWatch provides visibility into:
 
 The logging architecture is:
 
-```text
-Lambda
-   |
-   v
-CloudWatch Logs
-```
+<img width="212" height="240" alt="f9 drawio" src="https://github.com/user-attachments/assets/f8b6de25-dc27-44f9-a4da-266270882cfc" />
+
 
 This made it possible to investigate backend failures and verify that Lambda executions were occurring correctly.
 
@@ -449,15 +291,7 @@ Each commit represents a checkpoint in the development history.
 
 The repository was then pushed to GitHub.
 
-```text
-Local Project
-     |
-     v
-Git
-     |
-     v
-GitHub Repository
-```
+<img width="212" height="350" alt="f1 drawio" src="https://github.com/user-attachments/assets/2740a601-d0fd-49a2-8ef0-3ec40e10dd14" />
 
 ---
 
@@ -467,27 +301,7 @@ GitHub Actions was implemented to automate deployment.
 
 The development workflow is:
 
-```text
-Code Change
-    |
-    v
-Git Commit
-    |
-    v
-Git Push
-    |
-    v
-GitHub
-    |
-    v
-GitHub Actions
-    |
-    v
-Automated Deployment
-    |
-    v
-AWS
-```
+<img width="292" height="790" alt="f5 drawio" src="https://github.com/user-attachments/assets/51aa7628-3dad-4328-ad79-991ce2876eef" />
 
 This removes repetitive manual deployment steps and demonstrates practical CI/CD implementation.
 
@@ -497,39 +311,7 @@ This removes repetitive manual deployment steps and demonstrates practical CI/CD
 
 When a user visits the resume website:
 
-```text
-1. User requests the custom domain
-              |
-              v
-2. Route 53 resolves the domain
-              |
-              v
-3. CloudFront receives the request
-              |
-              v
-4. CloudFront serves the frontend
-              |
-              v
-5. JavaScript loads
-              |
-              v
-6. JavaScript calls API Gateway
-              |
-              v
-7. API Gateway invokes Lambda
-              |
-              v
-8. Lambda accesses DynamoDB
-              |
-              v
-9. Visitor count is returned
-              |
-              v
-10. API Gateway returns the response
-              |
-              v
-11. Website displays the visitor count
-```
+<img width="452" height="1230" alt="f4 drawio" src="https://github.com/user-attachments/assets/4fc832bb-0559-431c-8b95-d936fa0c6e43" />
 
 ---
 
@@ -710,51 +492,7 @@ REST API
 
 The completed project transformed a personal resume into a **fully deployed serverless cloud application**.
 
-```text
-                    CLOUD RESUME PLATFORM
-
-                         Custom Domain
-                              |
-                              v
-                         Route 53
-                              |
-                              v
-                         CloudFront
-                              |
-                              v
-                             S3
-                              |
-                         Frontend
-                              |
-                         JavaScript
-                              |
-                              v
-                         API Gateway
-                              |
-                              v
-                           Lambda
-                              |
-                              v
-                         DynamoDB
-
-                    Supporting Services
-                              |
-              +---------------+---------------+
-              |                               |
-             IAM                         CloudWatch
-              |
-              v
-        Access Control
-
-                    Development / Delivery
-                              |
-                           GitHub
-                              |
-                       GitHub Actions
-                              |
-                              v
-                            AWS
-```
+<img width="582" height="1770" alt="Final drawio" src="https://github.com/user-attachments/assets/11c2fc9a-4a33-46a7-a95b-e7554ba25720" />
 
 ---
 
@@ -786,6 +524,6 @@ The project strengthened my understanding of:
 
 Cloud Computing | AWS | DevOps | Linux | Python
 
-GitHub: [Add GitHub Profile]
+GitHub: https://github.com/shashanksgitwithhub
 
-Portfolio: [Add Portfolio URL]
+Portfolio: https://shashanktj.com
