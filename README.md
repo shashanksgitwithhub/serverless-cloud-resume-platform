@@ -1,6 +1,12 @@
-# ☁️Serverless Cloud Resume Platform
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Avenir+Next+LT+Pro&weight=100&size=55&duration=5021&pause=1000&vCenter=true&repeat=false&width=1200&height=100&lines=%E2%98%81%EF%B8%8FServerless+Cloud+Resume+Platform" alt="Typing SVG" /></a>
 
-A production-style **serverless cloud resume platform** built on AWS as part of the Cloud Resume Challenge.
+
+### A production-style **serverless cloud resume platform** built on AWS as part of the Cloud Resume Challenge. ###
+
+<div align="center">
+  <h1>Project - (https://shashanktj.com)</h1>
+</div>
+
 
 The project takes a personal resume website and turns it into a complete cloud-hosted application with a globally distributed frontend, custom DNS, HTTPS, a serverless backend, persistent visitor data, IAM-based access control, monitoring, and automated CI/CD deployment.
 
@@ -525,5 +531,3 @@ The project strengthened my understanding of:
 Cloud Computing | AWS | DevOps | Linux | Python
 
 GitHub: https://github.com/shashanksgitwithhub
-
-Portfolio: https://shashanktj.com
