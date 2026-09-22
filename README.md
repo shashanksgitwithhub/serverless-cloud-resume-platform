@@ -3,7 +3,7 @@
 
 ### A production-style **serverless cloud resume platform** built on AWS as part of the Cloud Resume Challenge. ###
 
-<div align="center">
+<div align="left">
   <h1>Project - (https://shashanktj.com)</h1>
 </div>
 
