@@ -1,5 +1,4 @@
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Avenir+Next+LT+Pro&weight=100&size=55&duration=5021&pause=1000&vCenter=true&repeat=false&width=1200&height=100&lines=%E2%98%81%EF%B8%8FServerless+Cloud+Resume+Platform" alt="Typing SVG" /></a>
-
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=30&pause=2&width=630&lines=Serverless+Cloud+Resume+Platform;AWS+%26+Cloudflare" alt="Typing SVG" /></a>
 
 ### A production-style personal portfolio platform demonstrating cloud infrastructure, Infrastructure as Code, serverless computing, DNS management, and cloud-based application deployment. ###
 
